@@ -26,7 +26,7 @@ struct StoryScenePage: View {
                 .font(.title)
                 .bold()
             
-            // 이미지
+            // 이미지 
             VStack {
                 Image(pageData.imageName)
                     .resizable()

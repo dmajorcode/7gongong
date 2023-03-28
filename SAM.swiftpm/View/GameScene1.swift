@@ -9,17 +9,10 @@ import SpriteKit
 import GameKit
 import SwiftUI
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene1: SKScene, SKPhysicsContactDelegate {
     let background = SKSpriteNode(imageNamed: "background")
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let ball = SKSpriteNode(imageNamed: "ball")
-    
-    enum bitmasks: UInt32 {
-        case frame = 0b1
-        case paddel = 0b10
-        case stone = 0b100
-        case ball = 0b1000
-    }
     
     override func didMove(to view: SKView) {
         scene?.size = view.bounds.size

@@ -1,7 +1,6 @@
 //
 //  GameScene.swift
 //  SAM
-//ㅇㅇㅇㅇ
 //  Created by 7gongong on 2023/03/28.
 //
 

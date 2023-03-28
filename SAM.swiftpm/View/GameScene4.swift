@@ -1,7 +1,8 @@
 //
-//  GameScene.swift
-//  SAM
-//  Created by 7gongong on 2023/03/28.
+//  SwiftUIView.swift
+//  
+//
+//  Created by 077tech on 2023/03/28.
 //
 
 import Foundation
@@ -9,7 +10,7 @@ import SpriteKit
 import GameKit
 import SwiftUI
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene4: SKScene, SKPhysicsContactDelegate {
     let background = SKSpriteNode(imageNamed: "background")
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let ball = SKSpriteNode(imageNamed: "ball")
@@ -138,3 +139,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 }
+

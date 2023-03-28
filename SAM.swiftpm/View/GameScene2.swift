@@ -69,12 +69,15 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
         self.physicsBody = frame
         
         // stones
-        makeStones(reihe: 6, bitmask: 0b10, y: 600, name: "blockB")
-        makeStones(reihe: 6, bitmask: 0b10, y: 620, name: "blockB")
+        makeStones(reihe: 6, bitmask: 0b10, y: 600, name: "blockP")
+        makeStones(reihe: 6, bitmask: 0b10, y: 620, name: "blockP")
         makeStones(reihe: 6, bitmask: 0b10, y: 640, name: "blockP")
-        makeStones(reihe: 6, bitmask: 0b10, y: 660, name: "blockP")
-        makeStones(reihe: 6, bitmask: 0b10, y: 680, name: "blockR")
-        makeStones(reihe: 6, bitmask: 0b10, y: 700, name: "blockR")
+        makeStones2(reihe: 6, bitmask: 0b10, y: 660, name: "blockU_unbreakable")
+        makeStones2(reihe: 6, bitmask: 0b10, y: 680, name: "blockU_unbreakable")
+        makeStones2(reihe: 6, bitmask: 0b10, y: 700, name: "blockU_unbreakable")
+        makeStones2(reihe: 6, bitmask: 0b10, y: 720, name: "blockU_unbreakable")
+        makeStones2(reihe: 6, bitmask: 0b10, y: 740, name: "blockU_unbreakable")
+        makeStones2(reihe: 6, bitmask: 0b10, y: 760, name: "blockU_unbreakable")
     }
     
     // touch operation
@@ -109,6 +112,25 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
             stone.physicsBody?.restitution = 1
             stone.physicsBody?.isDynamic = false
             stone.physicsBody?.categoryBitMask = bitmasks.stone.rawValue
+            stone.physicsBody?.contactTestBitMask = bitmasks.ball.rawValue
+            stone.physicsBody?.collisionBitMask = bitmasks.ball.rawValue
+            addChild(stone)
+        }
+    }
+    
+    // unbreakable stones
+    func makeStones2(reihe: Int, bitmask: UInt32, y: Int, name: String) {
+        for i in 1...reihe {
+            let stone = SKSpriteNode(imageNamed: name)
+            stone.size = CGSize(width: 55, height: 20)
+            stone.position = CGPoint(x: 5 + i * Int(stone.size.width), y: y)
+            stone.zPosition = 10
+            stone.name = "Stone" + String(i)
+            stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)
+            stone.physicsBody?.friction = 0
+            stone.physicsBody?.allowsRotation = false
+            stone.physicsBody?.restitution = 1
+            stone.physicsBody?.isDynamic = false
             stone.physicsBody?.contactTestBitMask = bitmasks.ball.rawValue
             stone.physicsBody?.collisionBitMask = bitmasks.ball.rawValue
             addChild(stone)

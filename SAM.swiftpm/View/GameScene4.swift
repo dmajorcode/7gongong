@@ -68,13 +68,10 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
         frame.collisionBitMask = bitmasks.ball.rawValue
         self.physicsBody = frame
         
-        // stones
-        makeStones(reihe: 6, bitmask: 0b10, y: 600, name: "blockB")
-        makeStones(reihe: 6, bitmask: 0b10, y: 620, name: "blockB")
-        makeStones(reihe: 6, bitmask: 0b10, y: 640, name: "blockP")
-        makeStones(reihe: 6, bitmask: 0b10, y: 660, name: "blockP")
-        makeStones(reihe: 6, bitmask: 0b10, y: 680, name: "blockR")
-        makeStones(reihe: 6, bitmask: 0b10, y: 700, name: "blockR")
+        // stones >> TODO : need to change into a new color
+        makeStones(reihe: 6, bitmask: 0b10, y: 600, name: "blockR")
+        makeStones(reihe: 6, bitmask: 0b10, y: 620, name: "blockR")
+        makeStones(reihe: 6, bitmask: 0b10, y: 640, name: "blockR")
     }
     
     // touch operation

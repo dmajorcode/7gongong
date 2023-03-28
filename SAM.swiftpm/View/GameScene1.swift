@@ -77,6 +77,9 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         makeStones2(reihe: 6, bitmask: 0b10, y: 720, name: "blockU_unbreakable")
         makeStones2(reihe: 6, bitmask: 0b10, y: 740, name: "blockU_unbreakable")
         makeStones2(reihe: 6, bitmask: 0b10, y: 760, name: "blockU_unbreakable")
+        makeStones2(reihe: 6, bitmask: 0b10, y: 780, name: "blockU_unbreakable")
+        makeStones2(reihe: 6, bitmask: 0b10, y: 800, name: "blockU_unbreakable")
+        makeStones2(reihe: 6, bitmask: 0b10, y: 820, name: "blockU_unbreakable")
     }
     
     // touch operation
@@ -130,7 +133,6 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
             stone.physicsBody?.allowsRotation = false
             stone.physicsBody?.restitution = 1
             stone.physicsBody?.isDynamic = false
-//            stone.physicsBody?.categoryBitMask = bitmasks.stone.rawValue
             stone.physicsBody?.contactTestBitMask = bitmasks.ball.rawValue
             stone.physicsBody?.collisionBitMask = bitmasks.ball.rawValue
             addChild(stone)

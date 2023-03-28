@@ -20,7 +20,7 @@ struct StoryScene: View {
     }
     
     func prevPage() {
-        if pageIndex < pageDataManager.pages.count + 1 {
+        if pageIndex >= 1 {
             pageIndex -= 1
         }
     }

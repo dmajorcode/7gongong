@@ -35,7 +35,7 @@ struct StoryScenePage: View {
             .frame(height: 300)
             .padding(.horizontal)
             
-            // 스토리
+            // 스토리 
             ZStack {
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(.mint)

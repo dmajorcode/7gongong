@@ -5,12 +5,13 @@
 //  Created by 077tech on 2023/03/28.
 //
 
+
 import Foundation
 import SpriteKit
 import GameKit
 import SwiftUI
 
-class GameScene4: SKScene, SKPhysicsContactDelegate {
+class FinalGameScene: SKScene, SKPhysicsContactDelegate {
     let background = SKSpriteNode(imageNamed: "background")
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let ball = SKSpriteNode(imageNamed: "ball")
@@ -72,9 +73,7 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
         makeStones(reihe: 6, bitmask: 0b10, y: 600, name: "blockB")
         makeStones(reihe: 6, bitmask: 0b10, y: 620, name: "blockB")
         makeStones(reihe: 6, bitmask: 0b10, y: 640, name: "blockP")
-        makeStones(reihe: 6, bitmask: 0b10, y: 660, name: "blockP")
-        makeStones(reihe: 6, bitmask: 0b10, y: 680, name: "blockR")
-        makeStones(reihe: 6, bitmask: 0b10, y: 700, name: "blockR")
+
     }
     
     // touch operation
@@ -114,6 +113,7 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
             addChild(stone)
         }
     }
+
     
     func didBegin(_ contact: SKPhysicsContact) {
         let contactA: SKPhysicsBody
@@ -132,4 +132,5 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
         }
     }
 }
+
 

@@ -10,7 +10,7 @@ import SwiftUI
 import SpriteKit
 
 struct ContentView: View {
-    var scene = GameScene()
+    var scene = GameScene1()
     
     var body: some View {
         SpriteView(scene: scene)

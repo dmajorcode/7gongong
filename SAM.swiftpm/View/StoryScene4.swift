@@ -14,13 +14,27 @@ struct StoryScene4: View {
     @State var nextButton = false
     
     var body: some View {
-        VStack {
-            Button("Next"){
-                nextButton = true
-            }
-            .fullScreenCover(isPresented: $nextButton) {
-                StoryScene5()
+        ZStack{
+            Image("daaanImage1")
+                .resizable()
+                .renderingMode(.original)
+                .ignoresSafeArea()
+            HStack {
+                Spacer()
+                Button(action: {
+                    nextButton = true
+                }) {
+                    Image(systemName: "arrowshape.right.fill")
+                        .resizable()
+                        .frame(width: 30, height: 40)
+                }
+                .padding(10)
+                .foregroundColor(.black)
+                .fullScreenCover(isPresented: $nextButton) {
+                    StoryScene5()
+                }
             }
         }
+
     }
 }

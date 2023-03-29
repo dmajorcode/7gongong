@@ -1,42 +1,40 @@
 //
 //  GameScene.swift
 //  SAM
+//
 //  Created by 7gongong on 2023/03/28.
 //
-
 import Foundation
 import SpriteKit
 import GameKit
-import SwiftUI
 
 class GameScene1: SKScene, SKPhysicsContactDelegate {
-    var clearCounter = 0
-    
     let background = SKSpriteNode(imageNamed: "background")
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let ball = SKSpriteNode(imageNamed: "ball")
-    
-    @State var toggleForOnOff : Bool = false
 
+    enum bitmasks: UInt32 {
+        case frame = 0b1
+        case paddel = 0b10
+        case stone = 0b100
+        case ball = 0b1000
+    }
 
-    
     override func didMove(to view: SKView) {
-
         scene?.size = view.bounds.size
         scene?.scaleMode = .aspectFill
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
-        self.isPaused = true
-        
+
         // background
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         background.zPosition = 1
         background.setScale(0.65)
         addChild(background)
         backgroundColor = .black
-        
+
         // paddel
-        paddel.position = CGPoint(x: size.width / 2, y: 60 + 80)
+        paddel.position = CGPoint(x: size.width / 2, y: 140)
         paddel.size = CGSize(width: 100, height: 20)
         paddel.zPosition = 10
         paddel.physicsBody = SKPhysicsBody(rectangleOf: paddel.size)
@@ -48,7 +46,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         paddel.physicsBody?.contactTestBitMask = bitmasks.ball.rawValue
         paddel.physicsBody?.collisionBitMask = bitmasks.ball.rawValue
         addChild(paddel)
-        
+
         // ball
         ball.position.x = paddel.position.x
         ball.position.y = paddel.position.y + 30
@@ -66,7 +64,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody?.contactTestBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
         ball.physicsBody?.collisionBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
         addChild(ball)
-        
+
         // frame
         let frame = SKPhysicsBody(edgeLoopFrom: self.frame)
         frame.friction = 0
@@ -74,13 +72,10 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         frame.contactTestBitMask = bitmasks.ball.rawValue
         frame.collisionBitMask = bitmasks.ball.rawValue
         self.physicsBody = frame
-        
-        // stones
 
-//        var ynum = 580
-//        var ynum = 580 - 40
-        var ynum = 580 - 40 - 240   
-        
+        // stones
+        var ynum = 580 - 40 - 240
+                
         for _ in 0...2{
             ynum += 20
             makeStones(reihe: 6, bitmask: 0b10, y: ynum, name: "blockB")
@@ -92,16 +87,18 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         }
         
         // TODO : Stones below to be deleted after double sizing blocks
-        for _ in 0...2{
+        for _ in 0...8{
             ynum += 20
-            makeStones(reihe: 6, bitmask: 0b10, y: ynum, name: "blockB")
+            makeStones2(reihe: 6, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
         }
         
         for _ in 0...8{
             ynum += 20
             makeStones2(reihe: 6, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
         }
+
     }
+
     // touch operation
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -109,11 +106,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
             paddel.position.x = location.x
         }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.isPaused = false
-    }
-    
+
     // paddel range
     override func update(_ currentTime: TimeInterval) {
         if paddel.position.x < 50 {
@@ -123,13 +116,13 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
             paddel.position.x = self.size.width - paddel.size.width / 2
         }
     }
-    
+
     // set stones
     func makeStones(reihe: Int, bitmask: UInt32, y: Int, name: String) {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
             stone.size = CGSize(width: 64, height: 20)
-            stone.position = CGPoint(x:  i * Int(stone.size.width) - 26, y: y)
+            stone.position = CGPoint(x: i * Int(stone.size.width) - 26, y: y)
             stone.zPosition = 10
             stone.name = "Stone" + String(i)
             stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)
@@ -143,13 +136,12 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
             addChild(stone)
         }
     }
-    
     // unbreakable stones
     func makeStones2(reihe: Int, bitmask: UInt32, y: Int, name: String) {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
             stone.size = CGSize(width: 64, height: 20)
-            stone.position = CGPoint(x:  i * Int(stone.size.width) - 26, y: y)
+            stone.position = CGPoint(x: i * Int(stone.size.width) - 26, y: y)
             stone.zPosition = 10
             stone.name = "Stone" + String(i)
             stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)
@@ -162,11 +154,11 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
             addChild(stone)
         }
     }
-    
+
     func didBegin(_ contact: SKPhysicsContact) {
         let contactA: SKPhysicsBody
         let contactB: SKPhysicsBody
-        
+
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
             contactA = contact.bodyA
             contactB = contact.bodyB
@@ -174,15 +166,9 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
             contactA = contact.bodyB
             contactB = contact.bodyA
         }
-        
+
         if contactA.categoryBitMask == bitmasks.stone.rawValue && contactB.categoryBitMask == bitmasks.ball.rawValue {
             contactA.node?.removeFromParent()
-            
-            // breakout counter
-            clearCounter = clearCounter + 1
-            if clearCounter == 2 {
-                gameClear()
-            }
         }
         
         // game over
@@ -193,13 +179,8 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    
     func gameClear() {
-        self.isPaused = true
+//            self.isPaused = true
 
-
-
-    }
+        }
 }
-    
-

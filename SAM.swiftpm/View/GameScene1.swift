@@ -16,76 +16,78 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let ball = SKSpriteNode(imageNamed: "ball")
     
-    @State private var changeView = false
-    var scene123 = StoryScene()
+    @State var toggleForOnOff : Bool = false
+
+
     
     override func didMove(to view: SKView) {
-        scene?.size = view.bounds.size
-        scene?.scaleMode = .aspectFill
-        physicsWorld.gravity = .zero
-        physicsWorld.contactDelegate = self
-        self.isPaused = true
-        
-        // background
-        background.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        background.zPosition = 1
-        background.setScale(0.65)
-        addChild(background)
-        backgroundColor = .black
-        
-        // paddel
-        paddel.position = CGPoint(x: size.width / 2, y: 60)
-        paddel.size = CGSize(width: 100, height: 20)
-        paddel.zPosition = 10
-        paddel.physicsBody = SKPhysicsBody(rectangleOf: paddel.size)
-        paddel.physicsBody?.friction = 0
-        paddel.physicsBody?.allowsRotation = false
-        paddel.physicsBody?.restitution = 1
-        paddel.physicsBody?.isDynamic = false
-        paddel.physicsBody?.categoryBitMask = bitmasks.paddel.rawValue
-        paddel.physicsBody?.contactTestBitMask = bitmasks.ball.rawValue
-        paddel.physicsBody?.collisionBitMask = bitmasks.ball.rawValue
-        addChild(paddel)
-        
-        // ball
-        ball.position.x = paddel.position.x
-        ball.position.y = paddel.position.y + 30
-        ball.zPosition = 10
-        ball.size = CGSize(width: 60, height: 60)
-        ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height / 2)
-        ball.physicsBody?.friction = 0
-        ball.physicsBody?.restitution = 1
-        ball.physicsBody?.linearDamping = 0
-        ball.physicsBody?.angularDamping = 0
-        ball.physicsBody?.allowsRotation = false
-        ball.physicsBody?.velocity = CGVector(dx: 350, dy: 350)
-        ball.physicsBody?.applyImpulse(CGVector(dx: 10, dy: 10))
-        ball.physicsBody?.categoryBitMask = bitmasks.ball.rawValue
-        ball.physicsBody?.contactTestBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
-        ball.physicsBody?.collisionBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
-        addChild(ball)
-        
-        // frame
-        let frame = SKPhysicsBody(edgeLoopFrom: self.frame)
-        frame.friction = 0
-        frame.categoryBitMask = bitmasks.frame.rawValue
-        frame.contactTestBitMask = bitmasks.ball.rawValue
-        frame.collisionBitMask = bitmasks.ball.rawValue
-        self.physicsBody = frame
-        
-        // stones
-        makeStones(reihe: 6, bitmask: 0b10, y: 600, name: "blockB")
-        makeStones(reihe: 6, bitmask: 0b10, y: 620, name: "blockB")
-        makeStones(reihe: 6, bitmask: 0b10, y: 640, name: "blockB")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 660, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 680, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 700, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 720, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 740, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 760, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 780, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 800, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 820, name: "blockU_unbreakable")
+            scene?.size = view.bounds.size
+            scene?.scaleMode = .aspectFill
+            physicsWorld.gravity = .zero
+            physicsWorld.contactDelegate = self
+            self.isPaused = true
+            
+            // background
+            background.position = CGPoint(x: size.width / 2, y: size.height / 2)
+            background.zPosition = 1
+            background.setScale(0.65)
+            addChild(background)
+            backgroundColor = .black
+            
+            // paddel
+            paddel.position = CGPoint(x: size.width / 2, y: 60)
+            paddel.size = CGSize(width: 100, height: 20)
+            paddel.zPosition = 10
+            paddel.physicsBody = SKPhysicsBody(rectangleOf: paddel.size)
+            paddel.physicsBody?.friction = 0
+            paddel.physicsBody?.allowsRotation = false
+            paddel.physicsBody?.restitution = 1
+            paddel.physicsBody?.isDynamic = false
+            paddel.physicsBody?.categoryBitMask = bitmasks.paddel.rawValue
+            paddel.physicsBody?.contactTestBitMask = bitmasks.ball.rawValue
+            paddel.physicsBody?.collisionBitMask = bitmasks.ball.rawValue
+            addChild(paddel)
+            
+            // ball
+            ball.position.x = paddel.position.x
+            ball.position.y = paddel.position.y + 30
+            ball.zPosition = 10
+            ball.size = CGSize(width: 60, height: 60)
+            ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height / 2)
+            ball.physicsBody?.friction = 0
+            ball.physicsBody?.restitution = 1
+            ball.physicsBody?.linearDamping = 0
+            ball.physicsBody?.angularDamping = 0
+            ball.physicsBody?.allowsRotation = false
+            ball.physicsBody?.velocity = CGVector(dx: 350, dy: 350)
+            ball.physicsBody?.applyImpulse(CGVector(dx: 10, dy: 10))
+            ball.physicsBody?.categoryBitMask = bitmasks.ball.rawValue
+            ball.physicsBody?.contactTestBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
+            ball.physicsBody?.collisionBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
+            addChild(ball)
+            
+            // frame
+            let frame = SKPhysicsBody(edgeLoopFrom: self.frame)
+            frame.friction = 0
+            frame.categoryBitMask = bitmasks.frame.rawValue
+            frame.contactTestBitMask = bitmasks.ball.rawValue
+            frame.collisionBitMask = bitmasks.ball.rawValue
+            self.physicsBody = frame
+            
+            // stones
+            makeStones(reihe: 6, bitmask: 0b10, y: 600, name: "blockB")
+            makeStones(reihe: 6, bitmask: 0b10, y: 620, name: "blockB")
+            makeStones(reihe: 6, bitmask: 0b10, y: 640, name: "blockB")
+            makeStones2(reihe: 6, bitmask: 0b10, y: 660, name: "blockU_unbreakable")
+            makeStones2(reihe: 6, bitmask: 0b10, y: 680, name: "blockU_unbreakable")
+            makeStones2(reihe: 6, bitmask: 0b10, y: 700, name: "blockU_unbreakable")
+            makeStones2(reihe: 6, bitmask: 0b10, y: 720, name: "blockU_unbreakable")
+            makeStones2(reihe: 6, bitmask: 0b10, y: 740, name: "blockU_unbreakable")
+            makeStones2(reihe: 6, bitmask: 0b10, y: 760, name: "blockU_unbreakable")
+            makeStones2(reihe: 6, bitmask: 0b10, y: 780, name: "blockU_unbreakable")
+            makeStones2(reihe: 6, bitmask: 0b10, y: 800, name: "blockU_unbreakable")
+            makeStones2(reihe: 6, bitmask: 0b10, y: 820, name: "blockU_unbreakable")
+
     }
     
     // touch operation
@@ -166,7 +168,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
             
             // breakout counter
             clearCounter = clearCounter + 1
-            if clearCounter == 12 {
+            if clearCounter == 2 {
                 gameClear()
             }
         }
@@ -182,19 +184,10 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     
     func gameClear() {
         self.isPaused = true
-//
-//        if changeView {
-//            View(scene: scene123)
-//        } else {
-//            Text("Regular View")
-//        }
-//        if changeView == false{
-//            Button("Toggle") {
-//                self.changeView.toggle()
-//            }
-//        }else{
-//
-//            }
-        }
+
+
+
     }
+}
+    
 

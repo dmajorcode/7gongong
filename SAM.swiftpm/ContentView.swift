@@ -10,7 +10,8 @@ import SpriteKit
 
 struct ContentView: View {
     init() {
-        UITabBar.appearance().backgroundColor = UIColor.black
+        UITabBar.appearance().backgroundColor = UIColor.clear
+//        tabBar.barTintColor = UIColor.clear
     }
     
     var body: some View {
@@ -20,22 +21,22 @@ struct ContentView: View {
                     Image(systemName: "1.circle")
                 })
             
-            StoryScene()
+            StoryScene1()
                 .tabItem({
                     Image(systemName: "2.circle")
                 })
             
-            StoryScene()
+            StoryScene2()
                 .tabItem({
                     Image(systemName: "3.circle")
                 })
             
-            StoryScene()
+            StoryScene3()
                 .tabItem({
                     Image(systemName: "4.circle")
                 })
             
-            StoryScene()
+            StoryScene4()
                 .tabItem({
                     Image(systemName: "5.circle")
                 })

@@ -17,11 +17,12 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     let ball = SKSpriteNode(imageNamed: "ball")
     
     @State var toggleForOnOff : Bool = false
-
-
+    
+    
+    
     
     override func didMove(to view: SKView) {
-
+        
         scene?.size = view.bounds.size
         scene?.scaleMode = .aspectFill
         physicsWorld.gravity = .zero
@@ -76,10 +77,10 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         self.physicsBody = frame
         
         // stones
-
-//        var ynum = 580
-//        var ynum = 580 - 40
-        var ynum = 580 - 40 - 240   
+        
+        //        var ynum = 580
+        //        var ynum = 580 - 40
+        var ynum = 580 - 40 - 240
         
         for _ in 0...2{
             ynum += 20
@@ -180,8 +181,9 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
             
             // breakout counter
             clearCounter = clearCounter + 1
-            if clearCounter == 2 {
-                gameClear()
+            
+            if clearCounter == 6 {
+                stageClear()
             }
         }
         
@@ -189,17 +191,65 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         if contactA.categoryBitMask == bitmasks.frame.rawValue && contactB.categoryBitMask == bitmasks.ball.rawValue {
             let yPosition = contact.contactPoint.y
             if yPosition <= self.frame.minY + 10 {
-                gameClear()
+                gameOver()
             }
         }
     }
     
-    func gameClear() {
-        self.isPaused = true
-
-
-
-    }
-}
     
+    
+    
+//    // new
+//    func presentSwiftUIView<Content: View>(_ content: Content) {
+//        if let viewController = self.view?.window?.rootViewController {
+//            let hostingController = UIHostingController(rootView: content)
+//            hostingController.modalPresentationStyle = .overFullScreen
+//            viewController.present(hostingController, animated: true, completion: nil)
+//        }
+//    }
+    
+    // Restart the current stage here
+    func resetGame() {
+        // Remove all nodes from the scene
+        self.removeAllChildren()
+        
+        // Reset the game state
+        clearCounter = 0
+        
+        // Re-initialize the game elements
+        didMove(to: view!)
+    }
+    
+    func gameOver() {
+        scene?.isPaused = true
+        let alert = UIAlertController(title: "Game Over", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { action in
+            self.resetGame()
+        }))
+        
+        if let viewController = self.view?.window?.rootViewController {
+            viewController.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func stageClear() {
+        // Pause the game
+        scene?.isPaused = true
+        
+        // Show stage completed message
+        let alert = UIAlertController(title: "Stage Completed", message: "Congratulations!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+            // Resume the game
+            self?.scene?.isPaused = true
+        }))
+        if let viewController = self.view?.window?.rootViewController {
+            viewController.present(alert, animated: true, completion: nil)
+        }
+    }
 
+
+
+
+
+
+}

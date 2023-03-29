@@ -21,22 +21,22 @@ struct ContentView: View {
                     Image(systemName: "1.circle")
                 })
             
-            StoryScene1()
+            StoryScene()
                 .tabItem({
                     Image(systemName: "2.circle")
                 })
             
-            StoryScene2()
+            StoryScene()
                 .tabItem({
                     Image(systemName: "3.circle")
                 })
             
-            StoryScene3()
+            StoryScene()
                 .tabItem({
                     Image(systemName: "4.circle")
                 })
             
-            StoryScene4()
+            StoryScene()
                 .tabItem({
                     Image(systemName: "5.circle")
                 })

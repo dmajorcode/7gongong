@@ -35,7 +35,7 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
         backgroundColor = .black
         
         // paddel
-        paddel.position = CGPoint(x: size.width / 2, y: 60)
+        paddel.position = CGPoint(x: size.width / 2, y: 140)
         paddel.size = CGSize(width: 100, height: 20)
         paddel.zPosition = 10
         paddel.physicsBody = SKPhysicsBody(rectangleOf: paddel.size)

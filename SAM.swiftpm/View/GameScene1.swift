@@ -13,7 +13,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     let paddel = SKSpriteNode(imageNamed: "paddel")
 
     let ball = SKSpriteNode(imageNamed: "jiku")
-    @State var toggleForOnOff : Bool = false
+//    @State var toggleForOnOff : Bool = false
 
     enum bitmasks: UInt32 {
         case frame = 0b1

@@ -10,7 +10,8 @@ import SpriteKit
 
 struct ContentView: View {
     init() {
-        UITabBar.appearance().backgroundColor = UIColor.black
+        UITabBar.appearance().backgroundColor = UIColor.clear
+//        tabBar.barTintColor = UIColor.clear
     }
     
     var body: some View {

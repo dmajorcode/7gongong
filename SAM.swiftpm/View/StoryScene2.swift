@@ -1,25 +1,27 @@
 //
-//  SwiftUIView.swift
-//  
+//  StoryScene1.swift
+//  SAM
 //
-//  Created by 077tech on 2023/03/28.
+//  Created by 077tech on 2023/03/29.
 //
 
 import SwiftUI
 import SpriteKit
 
-struct OnBoardingPage: View {
-    var scene = GameScene1()
+struct StoryScene2: View {
+    var scene = GameScene2()
     @State private var useSpriteView = false
-
-var body: some View {
-    ZStack{
+    
+    
+    var body: some View {
+        ZStack{
             if useSpriteView {
-                SpriteView(scene: scene).ignoresSafeArea()
+                SpriteView(scene: scene)
             } else {
-                Image("jikuStory")
+                Image("daaanImage")
                     .resizable()
-                    .frame(width: 400, height: 775)
+                    .renderingMode(.original)
+                //                    .frame(width: 400, height: 775)
                     .ignoresSafeArea()
                 HStack{
                     Spacer()
@@ -40,6 +42,4 @@ var body: some View {
             }
         }
     }
-
 }
-

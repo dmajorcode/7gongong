@@ -2,20 +2,21 @@
 //  SwiftUIView.swift
 //  
 //
-//  Created by 077tech on 2023/03/28.
+//  Created by 077tech on 2023/03/29.
 //
 
 import SwiftUI
 import SpriteKit
 
-struct OnBoardingPage: View {
+struct StoryScene1: View {
     var scene = GameScene1()
     @State private var useSpriteView = false
-
-var body: some View {
-    ZStack{
+    
+    
+    var body: some View {
+        ZStack{
             if useSpriteView {
-                SpriteView(scene: scene).ignoresSafeArea()
+                SpriteView(scene: scene)
             } else {
                 Image("jikuStory")
                     .resizable()
@@ -40,6 +41,4 @@ var body: some View {
             }
         }
     }
-
 }
-

@@ -16,7 +16,12 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let ball = SKSpriteNode(imageNamed: "ball")
     
+    @State var toggleForOnOff : Bool = false
+
+
+    
     override func didMove(to view: SKView) {
+
         scene?.size = view.bounds.size
         scene?.scaleMode = .aspectFill
         physicsWorld.gravity = .zero
@@ -175,7 +180,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
             
             // breakout counter
             clearCounter = clearCounter + 1
-            if clearCounter == 12 {
+            if clearCounter == 2 {
                 gameClear()
             }
         }
@@ -191,5 +196,10 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     
     func gameClear() {
         self.isPaused = true
+
+
+
     }
 }
+    
+

@@ -71,18 +71,17 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         self.physicsBody = frame
         
         // stones
-        makeStones(reihe: 6, bitmask: 0b10, y: 600, name: "blockB")
-        makeStones(reihe: 6, bitmask: 0b10, y: 620, name: "blockB")
-        makeStones(reihe: 6, bitmask: 0b10, y: 640, name: "blockB")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 660, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 680, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 700, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 720, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 740, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 760, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 780, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 800, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 820, name: "blockU_unbreakable")
+        var ynum = 580
+        
+        for _ in 0...2{
+            ynum += 20
+            makeStones(reihe: 6, bitmask: 0b10, y: ynum, name: "blockB")
+        }
+        
+        for _ in 0...8{
+            ynum += 20
+            makeStones2(reihe: 6, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
+        }
     }
     
     // touch operation

@@ -6,10 +6,19 @@
 //
 
 import SwiftUI
+import SpriteKit
 
 struct OnBoardingPage: View {
+    var scene = GameScene1()
+    
     var body: some View {
-        Text("Hello, OnBoardingPage!")
+        NavigationView {
+            
+            // link to GameScene1
+            NavigationLink(
+                destination: SpriteView(scene: scene)) {
+                    Text("Start the adventure")}
+        }
     }
 }
 

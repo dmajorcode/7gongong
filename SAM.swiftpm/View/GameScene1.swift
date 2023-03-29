@@ -10,6 +10,8 @@ import GameKit
 import SwiftUI
 
 class GameScene1: SKScene, SKPhysicsContactDelegate {
+    var clearCounter = 0
+    
     let background = SKSpriteNode(imageNamed: "background")
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let ball = SKSpriteNode(imageNamed: "ball")
@@ -19,6 +21,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         scene?.scaleMode = .aspectFill
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
+        self.isPaused = true
         
         // background
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
@@ -90,6 +93,10 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.isPaused = false
+    }
+    
     // paddel range
     override func update(_ currentTime: TimeInterval) {
         if paddel.position.x < 50 {
@@ -153,6 +160,24 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         
         if contactA.categoryBitMask == bitmasks.stone.rawValue && contactB.categoryBitMask == bitmasks.ball.rawValue {
             contactA.node?.removeFromParent()
+            
+            // breakout counter
+            clearCounter = clearCounter + 1
+            if clearCounter == 12 {
+                gameClear()
+            }
         }
+        
+        // game over
+        if contactA.categoryBitMask == bitmasks.frame.rawValue && contactB.categoryBitMask == bitmasks.ball.rawValue {
+            let yPosition = contact.contactPoint.y
+            if yPosition <= self.frame.minY + 10 {
+                gameClear()
+            }
+        }
+    }
+    
+    func gameClear() {
+        self.isPaused = true
     }
 }

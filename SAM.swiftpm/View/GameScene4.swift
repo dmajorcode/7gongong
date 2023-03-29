@@ -15,9 +15,15 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
 
     let background = SKSpriteNode(imageNamed: "background")
     let paddel = SKSpriteNode(imageNamed: "paddel")
-    let ball = SKSpriteNode(imageNamed: "ball")
+    let dianeBall = SKSpriteNode(imageNamed: "diane")
+    let MKBall = SKSpriteNode(imageNamed: "MK")
+    let pepeBall = SKSpriteNode(imageNamed: "pepe")
+    var randomInt : [Int] = []
     
     override func didMove(to view: SKView) {
+        makeRandomNumber()
+        let balls : [SKSpriteNode] = [dianeBall, MKBall, pepeBall]
+        
         scene?.size = view.bounds.size
         scene?.scaleMode = .aspectFill
         physicsWorld.gravity = .zero
@@ -44,23 +50,10 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
         paddel.physicsBody?.collisionBitMask = bitmasks.ball.rawValue
         addChild(paddel)
         
-        // ball
-        ball.position.x = paddel.position.x
-        ball.position.y = paddel.position.y + 30
-        ball.zPosition = 10
-        ball.size = CGSize(width: 60, height: 60)
-        ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height / 2)
-        ball.physicsBody?.friction = 0
-        ball.physicsBody?.restitution = 1
-        ball.physicsBody?.linearDamping = 0
-        ball.physicsBody?.angularDamping = 0
-        ball.physicsBody?.allowsRotation = false
-        ball.physicsBody?.velocity = CGVector(dx: 350, dy: 350)
-        ball.physicsBody?.applyImpulse(CGVector(dx: 10, dy: 10))
-        ball.physicsBody?.categoryBitMask = bitmasks.ball.rawValue
-        ball.physicsBody?.contactTestBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
-        ball.physicsBody?.collisionBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
-        addChild(ball)
+        for i in 0...2{
+            makeBall(balls[i], randomInt[i])
+            print(balls[i])
+        }
         
         // frame
         let frame = SKPhysicsBody(edgeLoopFrom: self.frame)
@@ -79,6 +72,30 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func makeRandomNumber(){
+        for _ in 0...5{
+            randomInt.append(Int.random(in: 200...700))
+        }
+    }
+    
+    func makeBall(_ ballname:SKSpriteNode, _ ranNum:Int){
+        ballname.position.x = background.position.x+100
+        ballname.position.y = background.position.y+100
+        ballname.zPosition = CGFloat(ranNum)
+        ballname.size = CGSize(width: 60, height: 60)
+        ballname.physicsBody = SKPhysicsBody(circleOfRadius: ballname.size.height / 2)
+        ballname.physicsBody?.friction = 0
+        ballname.physicsBody?.restitution = 1
+        ballname.physicsBody?.linearDamping = 0
+        ballname.physicsBody?.angularDamping = 0
+        ballname.physicsBody?.allowsRotation = false
+        ballname.physicsBody?.velocity = CGVector(dx: CGFloat(ranNum), dy: CGFloat(ranNum))
+        ballname.physicsBody?.applyImpulse(CGVector(dx: 10, dy: 10))
+        ballname.physicsBody?.categoryBitMask = bitmasks.ball.rawValue
+        ballname.physicsBody?.contactTestBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
+        ballname.physicsBody?.collisionBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
+        addChild(ballname)
+    }
     // touch operation
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -86,23 +103,13 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
             paddel.position.x = location.x
         }
     }
-    
-    // paddel range
-    override func update(_ currentTime: TimeInterval) {
-        if paddel.position.x < 50 {
-            paddel.position.x = 50
-        }
-        if paddel.position.x > self.size.width - paddel.size.width / 2 {
-            paddel.position.x = self.size.width - paddel.size.width / 2
-        }
-    }
-    
-    // set stones
+
+    // Set stones
     func makeStones(reihe: Int, bitmask: UInt32, y: Int, name: String) {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
-            stone.size = CGSize(width: 55, height: 20)
-            stone.position = CGPoint(x: 5 + i * Int(stone.size.width), y: y)
+            stone.size = CGSize(width: 64, height: 20)
+            stone.position = CGPoint(x:  i * Int(stone.size.width) - 26, y: y)
             stone.zPosition = 10
             stone.name = "Stone" + String(i)
             stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)
@@ -116,6 +123,16 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
             addChild(stone)
         }
     }
+    // paddel range
+    override func update(_ currentTime: TimeInterval) {
+        if paddel.position.x < 50 {
+            paddel.position.x = 50
+        }
+        if paddel.position.x > self.size.width - paddel.size.width / 2 {
+            paddel.position.x = self.size.width - paddel.size.width / 2
+        }
+    }
+    
     
     func didBegin(_ contact: SKPhysicsContact) {
         let contactA: SKPhysicsBody

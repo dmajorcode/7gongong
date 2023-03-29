@@ -9,14 +9,14 @@ import SwiftUI
 import SpriteKit
 
 struct StoryScene3: View {
-    var scene = GameScene3()
+    var scene = GameScene4()
     @State private var useSpriteView = false
     
     
     var body: some View {
         ZStack{
             if useSpriteView {
-                SpriteView(scene: scene)
+                SpriteView(scene: scene).ignoresSafeArea()
             } else {
                 Image("daaanImage1")
                     .resizable()

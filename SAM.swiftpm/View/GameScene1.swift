@@ -16,6 +16,9 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let ball = SKSpriteNode(imageNamed: "ball")
     
+    @State private var changeView = false
+    var scene123 = StoryScene()
+    
     override func didMove(to view: SKView) {
         scene?.size = view.bounds.size
         scene?.scaleMode = .aspectFill
@@ -179,5 +182,19 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     
     func gameClear() {
         self.isPaused = true
+//
+//        if changeView {
+//            View(scene: scene123)
+//        } else {
+//            Text("Regular View")
+//        }
+//        if changeView == false{
+//            Button("Toggle") {
+//                self.changeView.toggle()
+//            }
+//        }else{
+//
+//            }
+        }
     }
-}
+

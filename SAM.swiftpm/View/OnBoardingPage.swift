@@ -10,15 +10,20 @@ import SpriteKit
 
 struct OnBoardingPage: View {
     var scene = GameScene1()
+    @State private var useSpriteView = false
     
-    var body: some View {
-        NavigationView {
-            
-            // link to GameScene1
-            NavigationLink(
-                destination: SpriteView(scene: scene)) {
-                    Text("Start the adventure")}
-        }
-    }
+    
+var body: some View {
+       VStack {
+           if useSpriteView {
+               SpriteView(scene: scene)
+           } else {
+               Text("Regular View")
+               Button("Toggle") {
+                   self.useSpriteView.toggle()
+               }
+           }
+           }
+       }
 }
 

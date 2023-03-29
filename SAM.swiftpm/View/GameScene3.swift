@@ -81,6 +81,7 @@ class GameScene3: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    
     // touch operation
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {

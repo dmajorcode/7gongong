@@ -13,9 +13,14 @@ import SwiftUI
 class GameScene2: SKScene, SKPhysicsContactDelegate {
     let background = SKSpriteNode(imageNamed: "background")
     let paddel = SKSpriteNode(imageNamed: "paddel")
-    let ball = SKSpriteNode(imageNamed: "ball")
+    let chadBall = SKSpriteNode(imageNamed: "chad")
+    let maltyBall = SKSpriteNode(imageNamed: "malty")
+    var randomInt : [Int] = []
     
     override func didMove(to view: SKView) {
+        makeRandomNumber()
+        let balls : [SKSpriteNode] = [chadBall, maltyBall]
+        
         scene?.size = view.bounds.size
         scene?.scaleMode = .aspectFill
         physicsWorld.gravity = .zero
@@ -28,6 +33,10 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
         addChild(background)
         backgroundColor = .black
         
+        for i in 0...1{
+            makeBall(balls[i], randomInt[i])
+            print(balls[i])
+        }
         // paddel
         paddel.position = CGPoint(x: size.width / 2, y: 60)
         paddel.size = CGSize(width: 100, height: 20)
@@ -42,23 +51,6 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
         paddel.physicsBody?.collisionBitMask = bitmasks.ball.rawValue
         addChild(paddel)
         
-        // ball
-        ball.position.x = paddel.position.x
-        ball.position.y = paddel.position.y + 30
-        ball.zPosition = 10
-        ball.size = CGSize(width: 60, height: 60)
-        ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height / 2)
-        ball.physicsBody?.friction = 0
-        ball.physicsBody?.restitution = 1
-        ball.physicsBody?.linearDamping = 0
-        ball.physicsBody?.angularDamping = 0
-        ball.physicsBody?.allowsRotation = false
-        ball.physicsBody?.velocity = CGVector(dx: 350, dy: 350)
-        ball.physicsBody?.applyImpulse(CGVector(dx: 10, dy: 10))
-        ball.physicsBody?.categoryBitMask = bitmasks.ball.rawValue
-        ball.physicsBody?.contactTestBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
-        ball.physicsBody?.collisionBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
-        addChild(ball)
         
         // frame
         let frame = SKPhysicsBody(edgeLoopFrom: self.frame)
@@ -80,6 +72,31 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
             ynum += 20
             makeStones2(reihe: 6, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
         }
+    }
+    func makeRandomNumber(){
+        for _ in 0...5{
+            randomInt.append(Int.random(in: 200...700))
+        }
+        
+    }
+    
+    func makeBall(_ ballname:SKSpriteNode, _ ranNum:Int){
+        ballname.position.x = background.position.x+100
+        ballname.position.y = background.position.y+100
+        ballname.zPosition = CGFloat(ranNum)
+        ballname.size = CGSize(width: 60, height: 60)
+        ballname.physicsBody = SKPhysicsBody(circleOfRadius: ballname.size.height / 2)
+        ballname.physicsBody?.friction = 0
+        ballname.physicsBody?.restitution = 1
+        ballname.physicsBody?.linearDamping = 0
+        ballname.physicsBody?.angularDamping = 0
+        ballname.physicsBody?.allowsRotation = false
+        ballname.physicsBody?.velocity = CGVector(dx: CGFloat(ranNum), dy: CGFloat(ranNum))
+        ballname.physicsBody?.applyImpulse(CGVector(dx: 10, dy: 10))
+        ballname.physicsBody?.categoryBitMask = bitmasks.ball.rawValue
+        ballname.physicsBody?.contactTestBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
+        ballname.physicsBody?.collisionBitMask = bitmasks.paddel.rawValue | bitmasks.frame.rawValue | bitmasks.stone.rawValue
+        addChild(ballname)
     }
     
     // touch operation

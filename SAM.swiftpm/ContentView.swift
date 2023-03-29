@@ -9,9 +9,11 @@ import SwiftUI
 import SpriteKit
 
 struct ContentView: View {
-    init() {
-        UITabBar.appearance().backgroundColor = UIColor.black
-    }
+    var scene = GameScene1()
+
+    let storyScene = StoryScene()
+    let pageDataManager = PageDataManager()
+    @State var pageIndex = 0
     
     var body: some View {
         TabView {
@@ -19,26 +21,28 @@ struct ContentView: View {
                 .tabItem({
                     Image(systemName: "1.circle")
                 })
-            
-            StoryScene1()
+            StoryScenePage(pageData: pageDataManager.pages[pageIndex], buttonActionPrev: {storyScene.prevPage()},
+                           buttonActionNext: {storyScene.nextPage()})
+                .tabItem({
+                    Image(systemName: "1.circle")
+                })
+            StoryScenePage(pageData: pageDataManager.pages[pageIndex], buttonActionPrev: {storyScene.prevPage()},
+                           buttonActionNext: {storyScene.nextPage()})
                 .tabItem({
                     Image(systemName: "2.circle")
                 })
-            
-            StoryScene2()
+            StoryScenePage(pageData: pageDataManager.pages[pageIndex], buttonActionPrev: {storyScene.prevPage()},
+                           buttonActionNext: {storyScene.nextPage()})
                 .tabItem({
                     Image(systemName: "3.circle")
                 })
-            
-            StoryScene3()
+            StoryScenePage(pageData: pageDataManager.pages[pageIndex], buttonActionPrev: {storyScene.prevPage()},
+                           buttonActionNext: {storyScene.nextPage()})
                 .tabItem({
                     Image(systemName: "4.circle")
-                })
-            
-            StoryScene4()
-                .tabItem({
-                    Image(systemName: "5.circle")
                 })
         }
     }
 }
+
+

@@ -75,7 +75,7 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
     }
     func makeRandomNumber(){
         for _ in 0...5{
-            randomInt.append(Int.random(in: 200...700))
+            randomInt.append(Int.random(in: 200...300))
         }
         
     }

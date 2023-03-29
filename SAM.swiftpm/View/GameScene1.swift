@@ -11,7 +11,9 @@ import GameKit
 class GameScene1: SKScene, SKPhysicsContactDelegate {
     let background = SKSpriteNode(imageNamed: "background")
     let paddel = SKSpriteNode(imageNamed: "paddel")
-    let ball = SKSpriteNode(imageNamed: "ball")
+
+    let ball = SKSpriteNode(imageNamed: "jiku")
+    @State var toggleForOnOff : Bool = false
 
     enum bitmasks: UInt32 {
         case frame = 0b1
@@ -118,6 +120,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     }
 
     // set stones
+
     func makeStones(reihe: Int, bitmask: UInt32, y: Int, name: String) {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
@@ -136,7 +139,8 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
             addChild(stone)
         }
     }
-    // unbreakable stones
+
+    // Unbreakable stones
     func makeStones2(reihe: Int, bitmask: UInt32, y: Int, name: String) {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)

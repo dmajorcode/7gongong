@@ -15,7 +15,7 @@ struct StoryScene5: View {
     var body: some View {
         ZStack{
             if useSpriteView {
-                SpriteView(scene: scene)
+                SpriteView(scene: scene).ignoresSafeArea()
             } else {
                 Image("daaanStory")
                     .resizable()

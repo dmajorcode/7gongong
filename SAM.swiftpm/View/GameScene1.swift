@@ -31,7 +31,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         backgroundColor = .black
         
         // paddel
-        paddel.position = CGPoint(x: size.width / 2, y: 60)
+        paddel.position = CGPoint(x: size.width / 2, y: 60 + 80)
         paddel.size = CGSize(width: 100, height: 20)
         paddel.zPosition = 10
         paddel.physicsBody = SKPhysicsBody(rectangleOf: paddel.size)
@@ -71,20 +71,32 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         self.physicsBody = frame
         
         // stones
-        makeStones(reihe: 6, bitmask: 0b10, y: 600, name: "blockB")
-        makeStones(reihe: 6, bitmask: 0b10, y: 620, name: "blockB")
-        makeStones(reihe: 6, bitmask: 0b10, y: 640, name: "blockB")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 660, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 680, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 700, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 720, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 740, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 760, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 780, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 800, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 820, name: "blockU_unbreakable")
+
+//        var ynum = 580
+//        var ynum = 580 - 40
+        var ynum = 580 - 40 - 240   
+        
+        for _ in 0...2{
+            ynum += 20
+            makeStones(reihe: 6, bitmask: 0b10, y: ynum, name: "blockB")
+        }
+        
+        for _ in 0...8{
+            ynum += 20
+            makeStones2(reihe: 6, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
+        }
+        
+        // TODO : Stones below to be deleted after double sizing blocks
+        for _ in 0...2{
+            ynum += 20
+            makeStones(reihe: 6, bitmask: 0b10, y: ynum, name: "blockB")
+        }
+        
+        for _ in 0...8{
+            ynum += 20
+            makeStones2(reihe: 6, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
+        }
     }
-    
     // touch operation
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -111,8 +123,8 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     func makeStones(reihe: Int, bitmask: UInt32, y: Int, name: String) {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
-            stone.size = CGSize(width: 55, height: 20)
-            stone.position = CGPoint(x: 5 + i * Int(stone.size.width), y: y)
+            stone.size = CGSize(width: 64, height: 20)
+            stone.position = CGPoint(x:  i * Int(stone.size.width) - 26, y: y)
             stone.zPosition = 10
             stone.name = "Stone" + String(i)
             stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)
@@ -131,8 +143,8 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     func makeStones2(reihe: Int, bitmask: UInt32, y: Int, name: String) {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
-            stone.size = CGSize(width: 55, height: 20)
-            stone.position = CGPoint(x: 5 + i * Int(stone.size.width), y: y)
+            stone.size = CGSize(width: 64, height: 20)
+            stone.position = CGPoint(x:  i * Int(stone.size.width) - 26, y: y)
             stone.zPosition = 10
             stone.name = "Stone" + String(i)
             stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)

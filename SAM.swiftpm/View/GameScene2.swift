@@ -69,15 +69,17 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
         self.physicsBody = frame
         
         // stones
-        makeStones(reihe: 6, bitmask: 0b10, y: 600, name: "blockP")
-        makeStones(reihe: 6, bitmask: 0b10, y: 620, name: "blockP")
-        makeStones(reihe: 6, bitmask: 0b10, y: 640, name: "blockP")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 660, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 680, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 700, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 720, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 740, name: "blockU_unbreakable")
-        makeStones2(reihe: 6, bitmask: 0b10, y: 760, name: "blockU_unbreakable")
+        var ynum = 580
+        
+        for _ in 0...2{
+            ynum += 20
+            makeStones(reihe: 6, bitmask: 0b10, y: ynum, name: "blockP")
+        }
+        
+        for _ in 0...5{
+            ynum += 20
+            makeStones2(reihe: 6, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
+        }
     }
     
     // touch operation

@@ -170,5 +170,17 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         if contactA.categoryBitMask == bitmasks.stone.rawValue && contactB.categoryBitMask == bitmasks.ball.rawValue {
             contactA.node?.removeFromParent()
         }
+        
+        // game over
+        if contactA.categoryBitMask == bitmasks.frame.rawValue && contactB.categoryBitMask == bitmasks.ball.rawValue {
+            let yPosition = contact.contactPoint.y
+            if yPosition <= self.frame.minY + 10 {
+                gameClear()
+            }
+        }
     }
+    func gameClear() {
+//            self.isPaused = true
+
+        }
 }

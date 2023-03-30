@@ -17,9 +17,10 @@ var body: some View {
             if useSpriteView {
                 SpriteView(scene: scene).ignoresSafeArea()
             } else {
-                Image("jikuStory")
+                Image("daaanImage1")
                     .resizable()
-                    .frame(width: 400, height: 775)
+//                    .frame(width: 400, height: 775)
+                    .renderingMode(.original)
                     .ignoresSafeArea()
                 HStack{
                     Spacer()

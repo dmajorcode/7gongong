@@ -20,7 +20,7 @@ struct StoryScene1: View {
             } else {
                 Image("maltyChadStory")
                     .resizable()
-                    .frame(width: 400, height: 775)
+//                    .frame(width: 400, height: 775)
                     .ignoresSafeArea()
                 HStack{
                     Spacer()

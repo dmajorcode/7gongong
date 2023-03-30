@@ -12,27 +12,66 @@ struct StoryScene4: View {
     var nextStory = StoryScene5()
     //    var scene = FinalGameScene()
     @State var nextButton = false
+    @State var storyImage : String = "daaanImage1"
+    @State var storyImage2 : String = "maltyChadStory"
+    @State var imageToggle : Bool = true
+    @State var goToGame : Int = 0
+    
+    var scene = FinalGameScene()
+    @State private var useSpriteView = false
     
     var body: some View {
         ZStack{
-            Image("daaanImage1")
-                .resizable()
-                .renderingMode(.original)
-                .ignoresSafeArea()
+            if imageToggle{
+                Image("\(storyImage)")
+                    .resizable()
+                    .renderingMode(.original)
+                    .ignoresSafeArea()
+            }else{
+                Image("\(storyImage2)")
+                    .resizable()
+                    .renderingMode(.original)
+                    .ignoresSafeArea()
+            }
+
             HStack {
                 Spacer()
-                Button(action: {
-                    nextButton = true
-                }) {
-                    Image(systemName: "arrowshape.right.fill")
-                        .resizable()
-                        .frame(width: 30, height: 40)
+                ZStack{
+                    if goToGame == 0{
+                        //
+                        Button(action: {
+                            nextButton = true
+                            imageToggle = false
+                            if imageToggle == false{
+                                goToGame = 1
+                            }
+                        }) {
+                            Image(systemName: "arrowshape.right.fill")
+                                .resizable()
+                                .frame(width: 30, height: 40)
+                        }
+                        .padding(10)
+                        .foregroundColor(.black)
+                        //
+                    }else{
+                        if useSpriteView {
+                            SpriteView(scene: scene).ignoresSafeArea()
+                        }
+                        
+                        Button(action: {
+                            self.useSpriteView.toggle()
+                        }) {
+                            Image(systemName: "arrowshape.right.fill")
+                                .resizable()
+                                .frame(width: 30, height: 40)
+                        }
+                        .padding(10)
+                        .foregroundColor(.black)
+                    }
+                    
+
                 }
-                .padding(10)
-                .foregroundColor(.black)
-                .fullScreenCover(isPresented: $nextButton) {
-                    StoryScene5()
-                }
+                
             }
         }
 

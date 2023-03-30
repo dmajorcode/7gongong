@@ -11,7 +11,7 @@ struct StoryScene4: View {
     @State var nextButton = false
     @State var storyImage : String = "Story6"
     @State var storyImage2 : String = "Story7"
-    @State var imageToggle : Bool = true
+    @State var imageToggle : Bool = false
     @State var goToGame : Int = 0
     
     var scene = FinalGameScene()
@@ -24,31 +24,25 @@ struct StoryScene4: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .ignoresSafeArea()
             } else {
-                if imageToggle {
-                    Image("\(storyImage)")
-                        .resizable()
-                        .renderingMode(.original)
-                        .ignoresSafeArea()
-                } else {
                     Image("\(storyImage2)")
                         .resizable()
                         .renderingMode(.original)
                         .ignoresSafeArea()
-            }    
+            
                 HStack {
                     Spacer()
                     VStack {
                         Spacer()
                         Button(action: {
-                            if goToGame == 0 {
-                                nextButton = true
-                                imageToggle = false
-                                if imageToggle == false {
-                                    goToGame = 1
-                                }
-                            } else {
+//                            if goToGame == 0 {
+//                                nextButton = true
+//                                imageToggle = false
+//                                if imageToggle == false {
+//                                    goToGame = 1
+//                                }
+//                            } else {
                                 self.useSpriteView.toggle()
-                            }
+//                            }
                         }) {
                             Image(systemName: "arrowshape.right.fill")
                                 .resizable()

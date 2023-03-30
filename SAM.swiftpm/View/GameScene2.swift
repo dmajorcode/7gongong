@@ -86,8 +86,8 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
     
     func makeBall(_ ballname:SKSpriteNode, _ ranNum:Int){
 
-        ballname.position.x = background.position.x+100
-        ballname.position.y = background.position.y+100-120
+        ballname.position.x = background.position.x
+        ballname.position.y = background.position.y - 200
         ballname.zPosition = CGFloat(ranNum)
         ballname.size = CGSize(width: 60, height: 60)
         ballname.physicsBody = SKPhysicsBody(circleOfRadius: ballname.size.height / 2)
@@ -178,6 +178,7 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
             
             // breakout counter
             clearCounter = clearCounter + 1
+        
             
             if clearCounter == 9 {
                 stageClear()

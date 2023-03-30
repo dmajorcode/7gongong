@@ -18,6 +18,7 @@ struct OnBoardingPage: View {
     
     var scene = GameScene1()
     @State private var useSpriteView = false
+
     
     var body: some View {
         ZStack{
@@ -29,6 +30,7 @@ struct OnBoardingPage: View {
             }else{
                 Image("\(storyImage2)")
                     .resizable()
+
                     .renderingMode(.original)
                     .ignoresSafeArea()
             }

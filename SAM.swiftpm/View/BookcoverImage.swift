@@ -18,7 +18,7 @@ struct BookcoverImage: View {
             .ignoresSafeArea()
             .onTapGesture {
                 showingDetail.toggle()
-        }
+            }
             .fullScreenCover(isPresented: $showingDetail) {
                 ContentView()
             }
@@ -30,3 +30,4 @@ struct BookcoverImage_Previews: PreviewProvider {
         BookcoverImage()
     }
 }
+

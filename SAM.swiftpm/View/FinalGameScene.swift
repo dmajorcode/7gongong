@@ -13,7 +13,7 @@ import SwiftUI
 
 //MARK: Variables
 class FinalGameScene: SKScene, SKPhysicsContactDelegate {
-    let background = SKSpriteNode(imageNamed: "Stage_1")
+    let background = SKSpriteNode(imageNamed: "Stage_5")
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let ball = SKSpriteNode(imageNamed: "ball")
     let chadBall = SKSpriteNode(imageNamed: "chad")

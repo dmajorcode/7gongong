@@ -9,7 +9,7 @@ import SpriteKit
 import GameKit
 
 class GameScene1: SKScene, SKPhysicsContactDelegate {
-    let background = SKSpriteNode(imageNamed: "background")
+    let background = SKSpriteNode(imageNamed: "Stage_1")
     let paddel = SKSpriteNode(imageNamed: "paddel")
 
     let ball = SKSpriteNode(imageNamed: "jiku")
@@ -35,7 +35,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         // background
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         background.zPosition = 1
-        background.setScale(0.65)
+        background.setScale(0.32)
         addChild(background)
         backgroundColor = .black
 

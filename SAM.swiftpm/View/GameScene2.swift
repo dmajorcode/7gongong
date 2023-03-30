@@ -13,7 +13,7 @@ import SwiftUI
 class GameScene2: SKScene, SKPhysicsContactDelegate {
     var clearCounter = 0
     
-    let background = SKSpriteNode(imageNamed: "background")
+    let background = SKSpriteNode(imageNamed: "Stage_2")
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let chadBall = SKSpriteNode(imageNamed: "chad")
     let maltyBall = SKSpriteNode(imageNamed: "malty")
@@ -33,7 +33,7 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
         // background
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         background.zPosition = 1
-        background.setScale(0.65)
+        background.setScale(0.32)
         addChild(background)
         backgroundColor = .black
         

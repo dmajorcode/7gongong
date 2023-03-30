@@ -10,6 +10,8 @@ import GameKit
 import SwiftUI
 
 class GameScene3: SKScene, SKPhysicsContactDelegate {
+    var clearCounter = 0
+
     let background = SKSpriteNode(imageNamed: "background")
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let ball = SKSpriteNode(imageNamed: "ball")
@@ -137,6 +139,7 @@ class GameScene3: SKScene, SKPhysicsContactDelegate {
             addChild(stone)
         }
     }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         let contactA: SKPhysicsBody
         let contactB: SKPhysicsBody
@@ -151,6 +154,60 @@ class GameScene3: SKScene, SKPhysicsContactDelegate {
         
         if contactA.categoryBitMask == bitmasks.stone.rawValue && contactB.categoryBitMask == bitmasks.ball.rawValue {
             contactA.node?.removeFromParent()
+            
+            // breakout counter
+            clearCounter = clearCounter + 1
+            
+            if clearCounter == 6 {
+                stageClear()
+            }
+        }
+        
+        // game over
+        if contactA.categoryBitMask == bitmasks.frame.rawValue && contactB.categoryBitMask == bitmasks.ball.rawValue {
+            let yPosition = contact.contactPoint.y
+            if yPosition <= self.frame.minY + 10 {
+                gameOver()
+            }
+        }
+    }
+    
+    // Restart the current stage here
+    func resetGame() {
+        // Remove all nodes from the scene
+        self.removeAllChildren()
+        
+        // Reset the game state
+        clearCounter = 0
+        
+        // Re-initialize the game elements
+        didMove(to: view!)
+    }
+    
+    func gameOver() {
+        scene?.isPaused = true
+        let alert = UIAlertController(title: "Game Over", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { action in
+            self.resetGame()
+        }))
+        
+        if let viewController = self.view?.window?.rootViewController {
+            viewController.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func stageClear() {
+        // Pause the game
+        scene?.isPaused = true
+        
+        // Show stage completed message
+        let alert = UIAlertController(title: "Stage Completed", message: "Congratulations!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+            // Resume the game
+            self?.scene?.isPaused = true
+        }))
+        if let viewController = self.view?.window?.rootViewController {
+            viewController.present(alert, animated: true, completion: nil)
         }
     }
 }

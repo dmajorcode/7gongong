@@ -14,6 +14,9 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
 
     let ball = SKSpriteNode(imageNamed: "jiku")
 //    @State var toggleForOnOff : Bool = false
+    
+    var clearCounter = 0
+
 
     enum bitmasks: UInt32 {
         case frame = 0b1
@@ -209,6 +212,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         let alert = UIAlertController(title: "Game Over", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { action in
             self.resetGame()
+            self.scene?.isPaused = false
         }))
         
         if let viewController = self.view?.window?.rootViewController {

@@ -15,6 +15,7 @@ class GameScene3: SKScene, SKPhysicsContactDelegate {
     let background = SKSpriteNode(imageNamed: "background")
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let ball = SKSpriteNode(imageNamed: "ball")
+
     
     override func didMove(to view: SKView) {
         scene?.size = view.bounds.size
@@ -189,6 +190,7 @@ class GameScene3: SKScene, SKPhysicsContactDelegate {
         let alert = UIAlertController(title: "Game Over", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { action in
             self.resetGame()
+            self.scene?.isPaused = false
         }))
         
         if let viewController = self.view?.window?.rootViewController {

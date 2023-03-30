@@ -17,7 +17,9 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let chadBall = SKSpriteNode(imageNamed: "chad")
     let maltyBall = SKSpriteNode(imageNamed: "malty")
+    
     var randomInt : [Int] = []
+
     
     override func didMove(to view: SKView) {
         makeRandomNumber()
@@ -208,6 +210,7 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
         let alert = UIAlertController(title: "Game Over", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { action in
             self.resetGame()
+            self.scene?.isPaused = false
         }))
         
         if let viewController = self.view?.window?.rootViewController {

@@ -11,7 +11,6 @@ import GameKit
 import SwiftUI
 
 class GameScene4: SKScene, SKPhysicsContactDelegate {
-    var clearCounter = 0
 
     let background = SKSpriteNode(imageNamed: "background")
     let paddel = SKSpriteNode(imageNamed: "paddel")
@@ -19,6 +18,8 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
     let MKBall = SKSpriteNode(imageNamed: "MK")
     let pepeBall = SKSpriteNode(imageNamed: "pepe")
     var randomInt : [Int] = []
+    
+    var clearCounter = 0
     
     override func didMove(to view: SKView) {
         makeRandomNumber()
@@ -184,6 +185,7 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
         let alert = UIAlertController(title: "Game Over", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { action in
             self.resetGame()
+            self.scene?.isPaused = false
         }))
         
         if let viewController = self.view?.window?.rootViewController {

@@ -109,8 +109,8 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
     func makeStones(reihe: Int, bitmask: UInt32, y: Int, name: String) {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
-            stone.size = CGSize(width: 64*2, height: 20*2)
-            stone.position = CGPoint(x: i * Int(stone.size.width) - 55, y: y)
+            stone.size = CGSize(width: 66*2, height: 20*2)
+            stone.position = CGPoint(x: i * Int(stone.size.width) - 68, y: y)
             stone.zPosition = 10
             stone.name = "Stone" + String(i)
             stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)
@@ -182,7 +182,7 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
     
     func gameOver() {
         scene?.isPaused = true
-        let alert = UIAlertController(title: "Game Over", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Start another journey!", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { action in
             self.resetGame()
             self.scene?.isPaused = false

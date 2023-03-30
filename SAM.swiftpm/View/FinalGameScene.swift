@@ -13,7 +13,7 @@ import SwiftUI
 
 //MARK: Variables
 class FinalGameScene: SKScene, SKPhysicsContactDelegate {
-    let background = SKSpriteNode(imageNamed: "background")
+    let background = SKSpriteNode(imageNamed: "Stage_1")
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let ball = SKSpriteNode(imageNamed: "ball")
     let chadBall = SKSpriteNode(imageNamed: "chad")
@@ -36,9 +36,11 @@ class FinalGameScene: SKScene, SKPhysicsContactDelegate {
         // background
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         background.zPosition = 1
-        background.setScale(0.65)
+        background.setScale(0.30)
+        
         addChild(background)
         backgroundColor = .black
+        
 
         for i in 0...5{
             makeBall(balls[i], randomInt[i])

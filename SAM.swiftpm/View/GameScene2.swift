@@ -85,6 +85,7 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
     }
     
     func makeBall(_ ballname:SKSpriteNode, _ ranNum:Int){
+
         ballname.position.x = background.position.x
         ballname.position.y = background.position.y - 200
         ballname.zPosition = CGFloat(ranNum)

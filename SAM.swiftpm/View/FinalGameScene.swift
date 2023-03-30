@@ -21,12 +21,14 @@ class FinalGameScene: SKScene, SKPhysicsContactDelegate {
     let maltyBall = SKSpriteNode(imageNamed: "malty")
     let MKBall = SKSpriteNode(imageNamed: "MK")
     let pepeBall = SKSpriteNode(imageNamed: "pepe")
+    let youngBall = SKSpriteNode(imageNamed: "young")
+    let jikuBall = SKSpriteNode(imageNamed: "jiku")
     var randomInt : [Int] = []
 
 //MARK: Body
     override func didMove(to view: SKView) {
         makeRandomNumber()
-        let balls : [SKSpriteNode] = [ball, chadBall, dianeBall, maltyBall, MKBall, pepeBall]
+        let balls : [SKSpriteNode] = [ball, chadBall, dianeBall, maltyBall, MKBall, pepeBall, youngBall, jikuBall]
         
         scene?.size = view.bounds.size
         scene?.scaleMode = .aspectFill
@@ -42,7 +44,7 @@ class FinalGameScene: SKScene, SKPhysicsContactDelegate {
         backgroundColor = .black
         
 
-        for i in 0...5{
+        for i in 0...7{
             makeBall(balls[i], randomInt[i])
             print(balls[i])
         }
@@ -94,7 +96,7 @@ class FinalGameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func makeRandomNumber(){
-        for _ in 0...5{
+        for _ in 0...7{
             randomInt.append(Int.random(in: 200...700))
         }
         

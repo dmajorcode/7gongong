@@ -7,11 +7,11 @@
 import Foundation
 import SpriteKit
 import GameKit
+import SwiftUI
 
 class GameScene1: SKScene, SKPhysicsContactDelegate {
     let background = SKSpriteNode(imageNamed: "Stage_1")
     let paddel = SKSpriteNode(imageNamed: "paddel")
-
     let ball = SKSpriteNode(imageNamed: "jiku")
 //    @State var toggleForOnOff : Bool = false
     

@@ -9,8 +9,8 @@ import SwiftUI
 import SpriteKit
 struct StoryScene4: View {
     @State var nextButton = false
-    @State var storyImage : String = "daaanImage1"
-    @State var storyImage2 : String = "maltyChadStory"
+    @State var storyImage : String = "Story6"
+    @State var storyImage2 : String = "Story7"
     @State var imageToggle : Bool = true
     @State var goToGame : Int = 0
     

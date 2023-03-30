@@ -18,7 +18,7 @@ struct StoryScene3: View {
             if useSpriteView {
                 SpriteView(scene: scene).ignoresSafeArea()
             } else {
-                Image("daaanImage1")
+                Image("Story5")
                     .resizable()
                     .renderingMode(.original)
                 //                    .frame(width: 400, height: 775)

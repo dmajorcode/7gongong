@@ -11,8 +11,8 @@ import SpriteKit
 struct OnBoardingPage: View {
     
     @State var nextButton = false
-    @State var storyImage : String = "daaanImage1"
-    @State var storyImage2 : String = "maltyChadStory"
+    @State var storyImage : String = "Story1"
+    @State var storyImage2 : String = "Story2"
     @State var imageToggle : Bool = true
     @State var goToGame : Int = 0
     

@@ -7,11 +7,11 @@
 import Foundation
 import SpriteKit
 import GameKit
+import SwiftUI
 
 class GameScene1: SKScene, SKPhysicsContactDelegate {
     let background = SKSpriteNode(imageNamed: "Stage_1")
     let paddel = SKSpriteNode(imageNamed: "paddel")
-
     let ball = SKSpriteNode(imageNamed: "jiku")
 //    @State var toggleForOnOff : Bool = false
     
@@ -117,7 +117,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
             stone.size = CGSize(width: 66*2, height: 20*2)
-            stone.position = CGPoint(x: i * Int(stone.size.width) - 47, y: y)
+            stone.position = CGPoint(x: i * Int(stone.size.width) - 68, y: y)
             stone.zPosition = 10
             stone.name = "Stone" + String(i)
             stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)
@@ -137,7 +137,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
             stone.size = CGSize(width: 66*2, height: 20*2)
-            stone.position = CGPoint(x: i * Int(stone.size.width) - 47, y: y)
+            stone.position = CGPoint(x: i * Int(stone.size.width) - 68, y: y)
             stone.zPosition = 10
             stone.name = "Stone" + String(i)
             stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)

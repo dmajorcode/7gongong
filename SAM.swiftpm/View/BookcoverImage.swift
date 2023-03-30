@@ -1,33 +1,33 @@
+////
+////  BookcoverImage.swift
+////  SAM
+////
+////  Created by 077tech on 2023/03/30.
+////
 //
-//  BookcoverImage.swift
-//  SAM
+//import SwiftUI
 //
-//  Created by 077tech on 2023/03/30.
+//struct BookcoverImage: View {
+//    
+//    @State private var showingDetail = false
+//    
+//    var body: some View {
+//        Image("bookCover")
+//            .resizable()
+//            .renderingMode(.original)
+//            .ignoresSafeArea()
+//            .onTapGesture {
+//                showingDetail.toggle()
+//            }
+//            .fullScreenCover(isPresented: $showingDetail) {
+//                ContentView()
+//            }
+//    }
+//}
 //
-
-import SwiftUI
-
-struct BookcoverImage: View {
-    
-    @State private var showingDetail = false
-    
-    var body: some View {
-        Image("bookCover")
-            .resizable()
-            .renderingMode(.original)
-            .ignoresSafeArea()
-            .onTapGesture {
-                showingDetail.toggle()
-            }
-            .fullScreenCover(isPresented: $showingDetail) {
-                ContentView()
-            }
-    }
-}
-
-struct BookcoverImage_Previews: PreviewProvider {
-    static var previews: some View {
-        BookcoverImage()
-    }
-}
-
+//struct BookcoverImage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BookcoverImage()
+//    }
+//}
+//

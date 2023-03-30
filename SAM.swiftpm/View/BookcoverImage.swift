@@ -12,7 +12,7 @@ struct BookcoverImage: View {
     @State private var showingDetail = false
     
     var body: some View {
-        Image("Stage_1")
+        Image("bookCover")
             .resizable()
             .renderingMode(.original)
             .ignoresSafeArea()

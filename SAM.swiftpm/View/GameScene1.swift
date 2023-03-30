@@ -9,7 +9,7 @@ import SpriteKit
 import GameKit
 
 class GameScene1: SKScene, SKPhysicsContactDelegate {
-    let background = SKSpriteNode(imageNamed: "background")
+    let background = SKSpriteNode(imageNamed: "Stage_1")
     let paddel = SKSpriteNode(imageNamed: "paddel")
 
     let ball = SKSpriteNode(imageNamed: "jiku")
@@ -35,7 +35,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         // background
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         background.zPosition = 1
-        background.setScale(0.65)
+        background.setScale(0.32)
         addChild(background)
         backgroundColor = .black
 
@@ -83,24 +83,13 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         var ynum = 580 - 40 - 240
                 
         for _ in 0...2{
-            ynum += 20
-            makeStones(reihe: 6, bitmask: 0b10, y: ynum, name: "blockB")
+            ynum += 20*2
+            makeStones(reihe: 3, bitmask: 0b10, y: ynum, name: "blockB")
         }
         
         for _ in 0...8{
-            ynum += 20
-            makeStones2(reihe: 6, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
-        }
-        
-        // TODO : Stones below to be deleted after double sizing blocks
-        for _ in 0...8{
-            ynum += 20
-            makeStones2(reihe: 6, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
-        }
-        
-        for _ in 0...8{
-            ynum += 20
-            makeStones2(reihe: 6, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
+            ynum += 20*2
+            makeStones2(reihe: 3, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
         }
 
     }
@@ -124,12 +113,11 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     }
 
     // set stones
-
     func makeStones(reihe: Int, bitmask: UInt32, y: Int, name: String) {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
-            stone.size = CGSize(width: 64, height: 20)
-            stone.position = CGPoint(x: i * Int(stone.size.width) - 26, y: y)
+            stone.size = CGSize(width: 64*2, height: 20*2)
+            stone.position = CGPoint(x: i * Int(stone.size.width) - 55, y: y)
             stone.zPosition = 10
             stone.name = "Stone" + String(i)
             stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)
@@ -148,8 +136,8 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
     func makeStones2(reihe: Int, bitmask: UInt32, y: Int, name: String) {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
-            stone.size = CGSize(width: 64, height: 20)
-            stone.position = CGPoint(x: i * Int(stone.size.width) - 26, y: y)
+            stone.size = CGSize(width: 64*2, height: 20*2)
+            stone.position = CGPoint(x: i * Int(stone.size.width) - 55, y: y)
             stone.zPosition = 10
             stone.name = "Stone" + String(i)
             stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)
@@ -181,7 +169,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
             // breakout counter
             clearCounter = clearCounter + 1
             
-            if clearCounter == 6 {
+            if clearCounter == 9 {
                 stageClear()
             }
         }
@@ -202,7 +190,7 @@ class GameScene1: SKScene, SKPhysicsContactDelegate {
         
         // Reset the game state
         clearCounter = 0
-        
+            
         // Re-initialize the game elements
         didMove(to: view!)
     }

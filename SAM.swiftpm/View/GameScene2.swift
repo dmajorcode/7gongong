@@ -13,7 +13,7 @@ import SwiftUI
 class GameScene2: SKScene, SKPhysicsContactDelegate {
     var clearCounter = 0
     
-    let background = SKSpriteNode(imageNamed: "background")
+    let background = SKSpriteNode(imageNamed: "Stage_2")
     let paddel = SKSpriteNode(imageNamed: "paddel")
     let chadBall = SKSpriteNode(imageNamed: "chad")
     let maltyBall = SKSpriteNode(imageNamed: "malty")
@@ -33,7 +33,7 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
         // background
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         background.zPosition = 1
-        background.setScale(0.65)
+        background.setScale(0.32)
         addChild(background)
         backgroundColor = .black
         
@@ -65,16 +65,16 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
         self.physicsBody = frame
         
         // stones
-        var ynum = 580
+        var ynum = 580 - 40 - 240 + 120
         
         for _ in 0...2{
-            ynum += 20
-            makeStones(reihe: 6, bitmask: 0b10, y: ynum, name: "blockP")
+            ynum += 20*2
+            makeStones(reihe: 3, bitmask: 0b10, y: ynum, name: "blockP")
         }
         
         for _ in 0...5{
-            ynum += 20
-            makeStones2(reihe: 6, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
+            ynum += 20*2
+            makeStones2(reihe: 3, bitmask: 0b10, y: ynum, name: "blockU_unbreakable")
         }
     }
     func makeRandomNumber(){
@@ -85,8 +85,9 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
     }
     
     func makeBall(_ ballname:SKSpriteNode, _ ranNum:Int){
-        ballname.position.x = background.position.x
-        ballname.position.y = background.position.y-100
+
+        ballname.position.x = background.position.x+100
+        ballname.position.y = background.position.y+100-120
         ballname.zPosition = CGFloat(ranNum)
         ballname.size = CGSize(width: 60, height: 60)
         ballname.physicsBody = SKPhysicsBody(circleOfRadius: ballname.size.height / 2)
@@ -125,8 +126,8 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
     func makeStones(reihe: Int, bitmask: UInt32, y: Int, name: String) {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
-            stone.size = CGSize(width: 55, height: 20)
-            stone.position = CGPoint(x: 5 + i * Int(stone.size.width), y: y)
+            stone.size = CGSize(width: 64*2, height: 20*2)
+            stone.position = CGPoint(x: i * Int(stone.size.width) - 55, y: y)
             stone.zPosition = 10
             stone.name = "Stone" + String(i)
             stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)
@@ -145,8 +146,8 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
     func makeStones2(reihe: Int, bitmask: UInt32, y: Int, name: String) {
         for i in 1...reihe {
             let stone = SKSpriteNode(imageNamed: name)
-            stone.size = CGSize(width: 55, height: 20)
-            stone.position = CGPoint(x: 5 + i * Int(stone.size.width), y: y)
+            stone.size = CGSize(width: 64*2, height: 20*2)
+            stone.position = CGPoint(x: i * Int(stone.size.width) - 55, y: y)
             stone.zPosition = 10
             stone.name = "Stone" + String(i)
             stone.physicsBody = SKPhysicsBody(rectangleOf: stone.size)
@@ -178,7 +179,7 @@ class GameScene2: SKScene, SKPhysicsContactDelegate {
             // breakout counter
             clearCounter = clearCounter + 1
             
-            if clearCounter == 6 {
+            if clearCounter == 9 {
                 stageClear()
             }
         }

@@ -39,7 +39,7 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
         
         // paddel
         paddel.position = CGPoint(x: size.width / 2, y: 140)
-        paddel.size = CGSize(width: 100, height: 20)
+        paddel.size = CGSize(width: 150, height: 25)
         paddel.zPosition = 10
         paddel.physicsBody = SKPhysicsBody(rectangleOf: paddel.size)
         paddel.physicsBody?.friction = 0
@@ -69,7 +69,7 @@ class GameScene4: SKScene, SKPhysicsContactDelegate {
         
         for _ in 0...2{
             ynum += 20*2
-            makeStones(reihe: 3, bitmask: 0b10, y: ynum, name: "blockR")
+            makeStones(reihe: 3, bitmask: 0b10, y: ynum, name: "blockB")
         }
     }
     

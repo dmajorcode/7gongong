@@ -14,7 +14,7 @@ class GameScene3: SKScene, SKPhysicsContactDelegate {
 
     let background = SKSpriteNode(imageNamed: "Stage_3")
     let paddel = SKSpriteNode(imageNamed: "paddel")
-    let ball = SKSpriteNode(imageNamed: "ball")
+    let ball = SKSpriteNode(imageNamed: "daaan")
 
     
     override func didMove(to view: SKView) {

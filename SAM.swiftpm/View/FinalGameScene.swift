@@ -15,7 +15,7 @@ import SwiftUI
 class FinalGameScene: SKScene, SKPhysicsContactDelegate {
     let background = SKSpriteNode(imageNamed: "Stage_5")
     let paddel = SKSpriteNode(imageNamed: "paddel")
-    let ball = SKSpriteNode(imageNamed: "ball")
+    let ball = SKSpriteNode(imageNamed: "daaan")
     let chadBall = SKSpriteNode(imageNamed: "chad")
     let dianeBall = SKSpriteNode(imageNamed: "diane")
     let maltyBall = SKSpriteNode(imageNamed: "malty")

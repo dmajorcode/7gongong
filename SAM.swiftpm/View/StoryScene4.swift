@@ -7,10 +7,7 @@
 
 import SwiftUI
 import SpriteKit
-
 struct StoryScene4: View {
-//    var nextStory = StoryScene5()
-    //    var scene = FinalGameScene()
     @State var nextButton = false
     @State var storyImage : String = "daaanImage1"
     @State var storyImage2 : String = "maltyChadStory"
@@ -21,29 +18,36 @@ struct StoryScene4: View {
     @State private var useSpriteView = false
     
     var body: some View {
-        ZStack{
-            if imageToggle{
-                Image("\(storyImage)")
-                    .resizable()
-                    .renderingMode(.original)
+        ZStack {
+            if useSpriteView {
+                SpriteView(scene: scene)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .ignoresSafeArea()
-            }else{
-                Image("\(storyImage2)")
-                    .resizable()
-                    .renderingMode(.original)
-                    .ignoresSafeArea()
-            }
-
-            HStack {
-                Spacer()
-                ZStack{
-                    if goToGame == 0{
-                        //
+            } else {
+                if imageToggle {
+                    Image("\(storyImage)")
+                        .resizable()
+                        .renderingMode(.original)
+                        .ignoresSafeArea()
+                } else {
+                    Image("\(storyImage2)")
+                        .resizable()
+                        .renderingMode(.original)
+                        .ignoresSafeArea()
+            }    
+                HStack {
+                    Spacer()
+                    VStack {
+                        Spacer()
                         Button(action: {
-                            nextButton = true
-                            imageToggle = false
-                            if imageToggle == false{
-                                goToGame = 1
+                            if goToGame == 0 {
+                                nextButton = true
+                                imageToggle = false
+                                if imageToggle == false {
+                                    goToGame = 1
+                                }
+                            } else {
+                                self.useSpriteView.toggle()
                             }
                         }) {
                             Image(systemName: "arrowshape.right.fill")
@@ -52,24 +56,7 @@ struct StoryScene4: View {
                         }
                         .padding(10)
                         .foregroundColor(.black)
-                        //
-                    }else{
-                        if useSpriteView {
-                            SpriteView(scene: scene)
-                                .frame(width: 440, height: nil)
-                                .ignoresSafeArea()
-                                
-                        }else{
-                            Button(action: {
-                                self.useSpriteView.toggle()
-                            }) {
-                                Image(systemName: "arrowshape.right.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 40)
-                            }
-                            .padding(10)
-                            .foregroundColor(.black)
-                        }
+                        Spacer()
                     }
                 }
             }

@@ -73,8 +73,8 @@ class FinalGameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func makeBall(_ ballname:SKSpriteNode, _ ranNum:Int){
-        ballname.position.x = background.position.x+100
-        ballname.position.y = background.position.y+100
+        ballname.position.x = background.position.x
+        ballname.position.y = background.position.y
         ballname.zPosition = CGFloat(ranNum)
         ballname.size = CGSize(width: 60, height: 60)
         ballname.physicsBody = SKPhysicsBody(circleOfRadius: ballname.size.height / 2)

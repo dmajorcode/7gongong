@@ -9,7 +9,7 @@ import SwiftUI
 import SpriteKit
 
 struct StoryScene4: View {
-    var nextStory = StoryScene5()
+//    var nextStory = StoryScene5()
     //    var scene = FinalGameScene()
     @State var nextButton = false
     @State var storyImage : String = "daaanImage1"
@@ -55,25 +55,24 @@ struct StoryScene4: View {
                         //
                     }else{
                         if useSpriteView {
-                            SpriteView(scene: scene).ignoresSafeArea()
+                            SpriteView(scene: scene)
+                                .frame(width: 440, height: nil)
+                                .ignoresSafeArea()
+                                
+                        }else{
+                            Button(action: {
+                                self.useSpriteView.toggle()
+                            }) {
+                                Image(systemName: "arrowshape.right.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 40)
+                            }
+                            .padding(10)
+                            .foregroundColor(.black)
                         }
-                        
-                        Button(action: {
-                            self.useSpriteView.toggle()
-                        }) {
-                            Image(systemName: "arrowshape.right.fill")
-                                .resizable()
-                                .frame(width: 30, height: 40)
-                        }
-                        .padding(10)
-                        .foregroundColor(.black)
                     }
-                    
-
                 }
-                
             }
         }
-
     }
 }
